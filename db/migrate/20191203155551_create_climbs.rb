@@ -1,7 +1,7 @@
 class CreateClimbs < ActiveRecord::Migration[6.0]
   def change
     create_table :climbs do |t|
-      t.string :climb_id
+      t.integer :climb_id
       t.string :name
       t.string :rating
       t.string :stars

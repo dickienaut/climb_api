@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:comment).permit(:climb_id)
+    params.require(:comment).permit(:climb_id, :comment)
   end
 
 end
