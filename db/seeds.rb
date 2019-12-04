@@ -1,3 +1,5 @@
+require 'faker'
+
 puts "Deleting existing data..."
 Climb.destroy_all
 
@@ -14,20 +16,27 @@ climbs = JSON.parse(request)
 
 climbs['routes'].each do |climb|
   Climb.create(
-  climb_id: climb['id'],
+  internal_identifier: climb['id'],
   name: climb['name'],
   rating: climb['rating'],
-  stars: climb['stars'],
   imgSmallMed: climb['imgSmallMed'],
   latitude: climb['latitude'],
   longitude: climb['longitude'],
   location: climb['location'],)
 end
 
+4.times do
+  User.create(
+    email: Faker::Internet.email,
+    password_digest: "password"
+  )
+end
+
 150.times do
   Comment.create(
-    comment: 'I am a comment',
-    climb_id: Climb.all.sample.id)
+    content: 'I am a comment',
+    climb_id: Climb.all.sample.id,
+    user_id: [1,2,3,4].sample)
 end
 
 puts 'DB seeded!'

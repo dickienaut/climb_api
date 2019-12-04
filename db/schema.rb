@@ -10,16 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_03_212624) do
+ActiveRecord::Schema.define(version: 2019_12_04_212624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "climbs", force: :cascade do |t|
-    t.integer "climb_id"
+    t.integer "internal_identifier"
     t.string "name"
     t.string "rating"
-    t.string "stars"
     t.string "imgSmallMed"
     t.string "longitude"
     t.string "latitude"
@@ -29,12 +28,22 @@ ActiveRecord::Schema.define(version: 2019_12_03_212624) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.text "comment"
+    t.text "content"
     t.bigint "climb_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["climb_id"], name: "index_comments_on_climb_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "comments", "climbs"
+  add_foreign_key "comments", "users"
 end

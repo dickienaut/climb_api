@@ -3,6 +3,7 @@ class ClimbsController < ApplicationController
   def index
     # @climbs = Climb.all
     render json: Climb.all
+    # @climbs.as_json(only: [:name])
   end
 
   def show
@@ -30,7 +31,7 @@ class ClimbsController < ApplicationController
   private
 
   def climb_params
-    params.require(:climb).permit(:climb_id, :name, :rating, :stars, :imgSmallMed, :longitude, :latitude, :location)
+    params.require(:climb).permit(:internal_identifier, :name, :rating, :stars, :imgSmallMed, :longitude, :latitude, :location)
   end
 
 end

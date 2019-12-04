@@ -1,3 +1,3 @@
 class ClimbSerializer < ActiveModel::Serializer
-  attributes :id, :name, :climb_id, :rating, :stars, :imgSmallMed, :longitude, :latitude, :location, :comments
+  attributes :id, :name, :internal_identifier, :rating, :imgSmallMed, :longitude, :latitude, :location, :comments
 end
